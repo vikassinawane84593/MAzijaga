@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:mazi_jaga/screens/loginpagescreens.dart';
 
 class Welcomepage extends StatelessWidget {
   const Welcomepage({super.key});
@@ -19,7 +20,8 @@ class Welcomepage extends StatelessWidget {
             ),
           ),
 
-          /// Dark Gradient Overlay
+
+
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -90,7 +92,7 @@ class Welcomepage extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      // Navigate next screen
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (a) =>LoginPage()));
                     },
                     child:  Text(
                       "आताच सुरुवात करा",

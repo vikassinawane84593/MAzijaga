@@ -26,7 +26,7 @@ class _LogoshowState extends State<Logoshow> {
       body: Stack(
         children:[
           Container(
-            color: Theme.of(context).colorScheme.secondary,
+            color: Colors.white,
             height: double.infinity,
             width: double.infinity,
           ),

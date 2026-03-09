@@ -1,29 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:mazi_jaga/screens/loginpagescreens.dart';
-import 'package:mazi_jaga/screens/logoshowscreen.dart';
+import 'package:mazi_jaga/screens/welcomepagescreen.dart';
 
-
-void main() {
-  runApp(const MazijagaApp());
+void main(){
+  runApp(MyApp());
 }
 
-class MazijagaApp extends StatelessWidget {
-  const MazijagaApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Mazijaga',
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFFF4B400), // Golden theme
-          brightness: Brightness.dark,
+        theme: ThemeData(
+          useMaterial3: true,
+          textTheme: TextTheme()
         ),
-        fontFamily: 'Poppins',
-      ),
-      home:  LoginPage(),
+      home: Welcomepage(),
     );
   }
 }

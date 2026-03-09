@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -10,115 +8,214 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final formkey = GlobalKey<FormState>();
 
-  final border=OutlineInputBorder(
-    borderSide: BorderSide(width: 1)
+  final formkey = GlobalKey<FormState>();
+  final mobkey = GlobalKey<FormFieldState>();
+
+  final TextEditingController otpco = TextEditingController();
+  final TextEditingController mobco = TextEditingController();
+
+  bool showOtp = false;
+
+  final border = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(12),
+    borderSide: const BorderSide(width: 1, color: Colors.black26),
   );
 
-  final focusborder=OutlineInputBorder(
-  borderSide: BorderSide(width: 2,color: Colors.green),
+  final focusborder = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(12),
+    borderSide: const BorderSide(width: 2, color: Colors.green),
   );
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      body: Stack(
-          children: [
-        
-        
-            Container(
-                color: Colors.white,
-                padding: EdgeInsets.only(left: 60,right: 60,top: 60),
-                alignment: Alignment.topCenter,
-                child: Image.asset('assets/images/mazijagalogo.png')),
-        
-            SingleChildScrollView(
-              child: Container(
-                  alignment: Alignment.center,
-                  child: Column(
-                    children: [
-                      SizedBox(height: 250,),
-              
-                      Text('Find your perfect plot',style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: Colors.black54,fontSize: 20,)),
-              
-                      SizedBox(height: 20,),
-              
-                      Form(
-                          key: formkey,
-                          child:Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Column(
-                              children: [
-              
-                                SizedBox(
-                                  height:70,
-                                  child: TextFormField(
-                                    maxLength:10,
-                                    keyboardType: TextInputType.number,
-                                    style: TextStyle(color: Colors.black54,fontSize: 20,fontWeight: FontWeight.bold),
-                                    decoration: InputDecoration(
-                                      prefixIcon: Icon(Icons.call),
-                                        prefixIconColor: Colors.black54,
-                                        hintText: 'Enter a mob number',
-                                        hintStyle: Theme.of(context).textTheme.titleLarge!.copyWith(color: Colors.black54),
-                                        enabledBorder: border,
-                                      focusedBorder: focusborder,
-              
-                                    ),
-                                  ),
-                                ),
-              
-                                SizedBox(height: 10,),
-              
-                                SizedBox(
-                                  height: 70,
-                                  child: TextFormField(
-                                    maxLength: 6,
-                                    keyboardType: TextInputType.number,
-                                    style: TextStyle(color: Colors.black54,fontSize: 20,fontWeight: FontWeight.bold),
-                                    decoration: InputDecoration(
-                                        prefixIconColor: Colors.black54,
-                                      prefixIcon: Icon(Icons.lock),
-                                      hintText: 'Enter a Otp',
-                                        hintStyle: Theme.of(context).textTheme.titleLarge!.copyWith(color: Colors.black54),
-                                        focusedBorder: focusborder,
-                                      enabledBorder: border,
-                                    ),
-                                  ),
-                                ),
-              
-                                SizedBox(height: 20,),
-              
-              
-                                    SizedBox(
-                                      height: 50,
-                                        width:double.infinity,
-                                        child: ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.green.shade700,
-                                            shape: RoundedRectangleBorder()
-                                          ),
-                                            onPressed: (){},
-                                            child: Text('Login',style: TextStyle(color: Colors.black54),),)
-                                    ),
-              
-              
-              
-                              ],
-              
-                            ),
-                          )
+      backgroundColor: Colors.grey.shade100,
+
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+
+
+
+              Padding(
+                padding: const EdgeInsets.only(left: 50,right: 50,top: 50),
+                child: Image.asset(
+
+                        'assets/images/mazijagalogo.png',),
+              ),
+
+              Text(
+                "Find your perfect plot",
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium
+                    ?.copyWith(color: Colors.black45,fontSize: 20),
+              ),
+
+              const SizedBox(height: 40),
+
+
+              Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.all(20),
+
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 10,
+                        color: Colors.black.withAlpha(180),
+                        offset: const Offset(0, 5),
                       )
-              
                     ],
-                  )),
-            ),
-        
-        
-          ],
+                  ),
+
+                  child: Form(
+                    key: formkey,
+
+                    child: Column(
+                      children: [
+
+                        /// MOBILE
+                        TextFormField(
+                          key: mobkey,
+                          controller: mobco,
+                          maxLength: 10,
+                          keyboardType: TextInputType.phone,
+                          style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black),
+
+                          validator: (value) {
+
+                            if (value == null || value.isEmpty) {
+                              return "Mobile number required";
+                            }
+
+                            RegExp regex = RegExp(r'^[6-9]\d{9}$');
+
+                            if (!regex.hasMatch(value)) {
+                              return "Enter valid mobile number";
+                            }
+
+                            if (value.length!=10) {
+                              return "Enter 10 digit  mobile number";
+                            }
+
+                            return null;
+                          },
+
+                          decoration: InputDecoration(
+                            prefixIcon: const Icon(Icons.phone),
+                            hintText: "Enter mobile number",
+
+                            counterText: "",
+
+                            enabledBorder: border,
+                            focusedBorder: focusborder,
+                          ),
+                        ),
+
+                        const SizedBox(height: 20),
+
+                        /// OTP
+
+                        if (showOtp)
+                          TextFormField(
+                            style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black),
+                            controller: otpco,
+                            maxLength: 6,
+                            keyboardType: TextInputType.number,
+
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "OTP required";
+                              }
+
+                              if (value.length != 6) {
+                                return "Enter valid OTP";
+                              }
+
+                              return null;
+                            },
+
+                            decoration: InputDecoration(
+                              prefixIcon: const Icon(Icons.lock),
+                              hintText: "Enter OTP",
+                              counterText: "",
+
+                              enabledBorder: border,
+                              focusedBorder: focusborder,
+                            ),
+                          ),
+
+
+
+                        const SizedBox(height: 30),
+
+                        /// BUTTON
+                        SizedBox(
+                          width: double.infinity,
+                          height: 50,
+
+                          child: ElevatedButton(
+
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.green.shade700,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              elevation: 3,
+                            ),
+
+                            onPressed: () {
+
+                              if (!showOtp) {
+
+                                if (mobkey.currentState!.validate()) {
+
+                                  setState(() {
+                                    showOtp = true;
+                                  });
+
+                                }
+
+                              } else {
+
+                                if (formkey.currentState!.validate()) {
+
+                                  print("Login Success");
+
+                                }
+
+                              }
+
+                            },
+
+                            child: Text(
+                              showOtp ? "Login" : "Send OTP",
+                              style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                        ),
+
+                      ],
+                    ),
+                  ),
+                ),
+
+
+              const SizedBox(height: 30),
+
+            ],
+          ),
         ),
-      
+      ),
     );
   }
 }
