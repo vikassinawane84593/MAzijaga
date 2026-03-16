@@ -80,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Column(
                       children: [
 
-                        /// MOBILE
+
                         TextFormField(
                           key: mobkey,
                           controller: mobco,
@@ -120,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
 
                         const SizedBox(height: 20),
 
-                        /// OTP
+
 
                         if (showOtp)
                           TextFormField(
@@ -155,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
 
                         const SizedBox(height: 30),
 
-                        /// BUTTON
+
                         SizedBox(
                           width: double.infinity,
                           height: 50,
@@ -170,29 +170,7 @@ class _LoginPageState extends State<LoginPage> {
                               elevation: 3,
                             ),
 
-                            onPressed: () {
-
-                              if (!showOtp) {
-
-                                if (mobkey.currentState!.validate()) {
-
-                                  setState(() {
-                                    showOtp = true;
-                                  });
-
-                                }
-
-                              } else {
-
-                                if (formkey.currentState!.validate()) {
-
-                                  print("Login Success");
-
-                                }
-
-                              }
-
-                            },
+                            onPressed:null,
 
                             child: Text(
                               showOtp ? "Login" : "Send OTP",

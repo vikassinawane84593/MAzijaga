@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mazi_jaga/screens/logoshowscreen.dart';
 import 'package:mazi_jaga/screens/welcomepagescreen.dart';
 
 void main(){
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           textTheme: TextTheme()
         ),
-      home: Welcomepage(),
+      home: Logoshow(),
     );
   }
 }

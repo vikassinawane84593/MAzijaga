@@ -43,19 +43,15 @@ class Welcomepage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
 
-                const Icon(Icons.home_rounded, size: 60, color: Colors.white),
+                Padding(
+                  padding: const EdgeInsets.only(left: 70,right:70,top: 70, ),
+                  child: Center(
 
-                const SizedBox(height: 20),
-
-                Text(
-                  "Mazijaga",
-                  style: theme.textTheme.headlineMedium?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+                      child: Image.asset('assets/images/mazijagalogo.png',)
                   ),
                 ),
 
-                const SizedBox(height: 30),
+
 
                 Text(
                   "माझी जागा. माझं भविष्य.",

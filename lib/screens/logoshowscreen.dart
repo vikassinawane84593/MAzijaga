@@ -11,7 +11,7 @@ class Logoshow extends StatefulWidget {
 
 class _LogoshowState extends State<Logoshow> {
   Future<void>delay() async{
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(Duration(seconds: 2));
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (a) =>Welcomepage()));
 }
 
@@ -30,7 +30,12 @@ class _LogoshowState extends State<Logoshow> {
             height: double.infinity,
             width: double.infinity,
           ),
-          Center(child: Image.asset('assets/images/mazijagalogo.png'))
+          Padding(
+            padding: const EdgeInsets.all(70.0),
+            child: Center(
+                child: Image.asset('assets/images/mazijagalogo.png')
+            ),
+          )
 
         ]
       ),
